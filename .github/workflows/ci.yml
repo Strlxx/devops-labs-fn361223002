@@ -70,6 +70,14 @@ jobs:
           docker logs app
           exit 1
 
+      - name: Scan for vulnerabilities
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: notes-api:${{ github.sha }}
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+
       - name: Push to GitHub Container Registry
         if: github.event_name == 'push'
         run: |
