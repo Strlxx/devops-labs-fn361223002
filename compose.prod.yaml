@@ -1,0 +1,11 @@
+services:
+  app:
+    image: ghcr.io/strlxx/devops-labs-fn361223002:${APP_TAG:-latest}
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      DATABASE_URL: postgresql://notes:notes@db:5432/notes
+
+    restart: unless-stopped
